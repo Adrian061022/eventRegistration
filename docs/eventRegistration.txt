@@ -27,3 +27,81 @@ composer require laravel/sanctum
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 
 commit
+
+#2 User migracio/modell
+
+User migration
+
+$table->string('phone')->nullable();
+$table->boolean('is_admin')->default(false);
+$table->softDeletes();
+
+User model 
+app/models/user.php
+
+use HasFactory, Notifiable, SoftDeletes, HasApiTokens, HasFactory;
+
+protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'phone',
+        'is_admin',
+    ];
+
+ public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'registrations')
+            ->withPivot('status', 'registered_at')
+            ->withTimestamps();
+    }
+
+
+php artisan make:model Event -m
+
+event migracio es modell
+
+$table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->dateTime('date');
+            $table->string('location');
+            $table->integer('max_attendees');
+            $table->softDeletes();
+
+
+app/models/event.php
+
+ use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'name',
+        'description',
+        'date',
+        'location',
+        'max_attendees',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'date' => 'datetime',
+        ];
+    }
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'registrations')
+        ->withPivot('status', 'registered_at')
+        ->withTimestamps();
+    }
