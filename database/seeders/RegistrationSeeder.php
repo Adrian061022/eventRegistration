@@ -17,6 +17,12 @@ class RegistrationSeeder extends Seeder
         $users = User::all();
         $events = Event::all();
 
+        // Check if we have enough users and events
+        if ($users->count() < 4 || $events->count() < 3) {
+            $this->command->warn('RegistrationSeeder: Not enough users or events to create sample registrations.');
+            return;
+        }
+
         $sampleRegistrations = [
             [
                 'user_id' => $users[1]->id,
@@ -25,7 +31,7 @@ class RegistrationSeeder extends Seeder
                 'registered_at' => now()->subDays(5),
             ],
             [
-                'user_id' => $users[1]->id,
+                'user_id' => $users[2]->id,
                 'event_id' => $events[0]->id,
                 'status' => 'Függőben',
                 'registered_at' => now()->subDays(3),
@@ -50,7 +56,12 @@ class RegistrationSeeder extends Seeder
 
         
         foreach ($users as $user) {
-            $randomEvents = $events->random(rand(1, 3)); 
+            if ($events->count() === 0) {
+                continue;
+            }
+            
+            $randomCount = min(rand(1, 3), $events->count());
+            $randomEvents = $events->random($randomCount); 
 
             foreach ($randomEvents as $event) {
                 $exists = Registration::where('user_id', $user->id)
