@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
-            $table->enum('status', ['Függőben', 'Elfogadva', 'Elutasítva'])->default('Függőben');
+            $table->string('status')->default('registered'); // e.g., registered, cancelled, waitlisted
             $table->timestamp('registered_at')->useCurrent();
             $table->timestamps();
             $table->softDeletes();
-            //egy user csak egyszer regisztrálhat egy eseményre
+
             $table->unique(['user_id', 'event_id']);
         });
     }

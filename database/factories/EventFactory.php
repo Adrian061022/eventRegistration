@@ -59,7 +59,7 @@ class EventFactory extends Factory
             'description' => $this->faker->randomElement($topics),
             'date' => $this->faker->dateTimeBetween('-1 month', '+6 months'),
             'location' => $this->faker->randomElement($locations),
-            'max_attendees' => $this->faker->numberBetween(10, 200),
+            'max_participants' => $this->faker->numberBetween(10, 200),
         ];
     }
 }

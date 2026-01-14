@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('date');
             $table->string('location');
-            $table->integer('max_attendees');
+            $table->integer('max_participants');
             $table->softDeletes();
 
 

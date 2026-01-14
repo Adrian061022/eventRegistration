@@ -3,48 +3,80 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Registration;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Register the authenticated user for an event.
      */
-    public function index()
+    public function register(Event $event)
     {
-        //
+        $user = Auth::user();
+
+        // Check if event is in the past
+        if ($event->date->isPast()) {
+            return response()->json(['message' => 'Cannot register for a past event.'], 422);
+        }
+
+        // Check if event is full
+        if ($event->registrations()->count() >= $event->max_participants) {
+            return response()->json(['message' => 'Event is full.'], 422);
+        }
+
+        // Check if user is already registered
+        $existingRegistration = $user->registrations()->where('event_id', $event->id)->first();
+        if ($existingRegistration) {
+            return response()->json(['message' => 'You are already registered for this event.'], 409);
+        }
+
+        $registration = $user->registrations()->create(['event_id' => $event->id]);
+
+        return response()->json([
+            'message' => 'Successfully registered for the event.',
+            'registration' => $registration
+        ], 201);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Unregister the authenticated user from an event.
      */
-    public function store(Request $request)
+    public function unregister(Event $event)
     {
-        //
+        $user = Auth::user();
+
+        $registration = $user->registrations()->where('event_id', $event->id)->first();
+
+        if (!$registration) {
+            return response()->json(['message' => 'You are not registered for this event.'], 404);
+        }
+
+        $registration->delete();
+
+        return response()->json(['message' => 'Successfully unregistered from the event.']);
     }
 
     /**
-     * Display the specified resource.
+     * Allow an admin to remove a user from an event.
      */
-    public function show(Registration $registration)
+    public function adminRemoveUser(Event $event, User $user)
     {
-        //
-    }
+        if (!Auth::user()->is_admin) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Registration $registration)
-    {
-        //
-    }
+        $registration = $user->registrations()->where('event_id', $event->id)->first();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Registration $registration)
-    {
-        //
+        if (!$registration) {
+            return response()->json(['message' => 'User is not registered for this event.'], 404);
+        }
+
+        $registration->delete();
+
+        return response()->json(['message' => 'User has been removed from the event.']);
     }
 }

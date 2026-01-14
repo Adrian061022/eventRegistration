@@ -26,20 +26,20 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/filter', [EventController::class, 'filter']);
 
         Route::post('/', [EventController::class, 'store']);
-        Route::put('/{id}', [EventController::class, 'update']);
-        Route::delete('/{id}', [EventController::class, 'destroy']);
+        Route::put('/{event}', [EventController::class, 'update']);
+        Route::delete('/{event}', [EventController::class, 'destroy']);
 
-        Route::post('{event}/register', [RegistrationController::class, 'register']);    
-        Route::delete('{event}/unregister', [RegistrationController::class, 'unregister']); 
-        Route::delete('{event}/users/{user}', [RegistrationController::class, 'adminRemoveUser']); 
+        Route::post('{event}/register', [RegistrationController::class, 'register'])->withTrashed();
+        Route::delete('{event}/unregister', [RegistrationController::class, 'unregister'])->withTrashed();
+        Route::delete('{event}/users/{user}', [RegistrationController::class, 'adminRemoveUser'])->withTrashed(); 
     });
 
         Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
-        Route::get('/{id}', [UserController::class, 'show']);
+        Route::get('/{user}', [UserController::class, 'show']);
         Route::post('/', [UserController::class, 'store']);
-        Route::put('/{id}', [UserController::class, 'update']);
-        Route::delete('/{id}', [UserController::class, 'destroy']);
+        Route::put('/{user}', [UserController::class, 'update']);
+        Route::delete('/{user}', [UserController::class, 'destroy']);
     });
 
     });

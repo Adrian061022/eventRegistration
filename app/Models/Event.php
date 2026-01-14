@@ -16,7 +16,7 @@ class Event extends Model
         'description',
         'date',
         'location',
-        'max_attendees',
+        'max_participants',
     ];
 
     protected function casts(): array
