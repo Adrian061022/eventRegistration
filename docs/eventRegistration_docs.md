@@ -541,7 +541,6 @@ Bejelentkezés e-mail címmel és jelszóval.
 
 **Példa URL:**
 `/events/filter?date_from=2026-01-01&date_to=2026-12-31&location=Budapest`
-<img width="863" height="123" alt="image" src="https://github.com/user-attachments/assets/0926a4e8-b960-49d3-9199-8aa381267258" />
 
 **Válasz:** `200 OK`
 ```json
@@ -560,7 +559,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ## Regisztrációk Kezelése
 
 ### **POST** `/events/{event}/register` - Eseményre Regisztráció
-<img width="860" height="150" alt="image" src="https://github.com/user-attachments/assets/62fa7abf-0ed5-4506-9390-14f9cfa16477" />
+<img width="855" height="133" alt="image" src="https://github.com/user-attachments/assets/1d1d12e2-694b-4309-98a8-0dd7b3aa9f9f" />
 
 **Válasz (sikeres):** `201 Created`
 ```json
@@ -586,7 +585,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **DELETE** `/events/{event}/unregister` - Leiratkozás Eseményről
-<img width="855" height="133" alt="image" src="https://github.com/user-attachments/assets/1d1d12e2-694b-4309-98a8-0dd7b3aa9f9f" />
+<img width="860" height="150" alt="image" src="https://github.com/user-attachments/assets/62fa7abf-0ed5-4506-9390-14f9cfa16477" />
 
 **Válasz (sikeres):** `200 OK`
 ```json
@@ -598,7 +597,8 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **DELETE** `/events/{event}/users/{user}` - Admin töröl felhasználót az eseményről
-![Uploading image.png…]()
+<img width="837" height="129" alt="image" src="https://github.com/user-attachments/assets/24141889-42b2-42e1-802a-a0f77abcaf13" />
+
 
 **Válasz (sikeres):** `200 OK`
 ```json
