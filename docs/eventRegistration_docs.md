@@ -315,6 +315,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **POST** `/users` - Felhasználó Létrehozása (Admin Csak)
+<img width="847" height="166" alt="image" src="https://github.com/user-attachments/assets/9f406e4f-b811-418f-9cf4-6ea254cb712f" />
 
 **Kérés Törzse:**
 ```json
@@ -358,6 +359,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **PUT** `/users/{id}` - Felhasználó Módosítása (Admin Csak)
+<img width="842" height="164" alt="image" src="https://github.com/user-attachments/assets/d36447a0-3ca1-43e1-b265-7d928894fcb8" />
 
 **Kérés Törzse:**
 ```json
@@ -420,6 +422,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ### **GET** `/events/upcoming` - Közelgő Események
 
 **Leírás:** csak a jövőbeli eseményeket listázza (dátum szerint növekvően, lapozva).
+<img width="840" height="159" alt="image" src="https://github.com/user-attachments/assets/8de7035d-358b-4bf1-a945-430bce982610" />
 
 **Válasz:** `200 OK`
 ```json
@@ -442,6 +445,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ### **GET** `/events/past` - Múltbeli Események
 
 **Leírás:** csak a múltbeli eseményeket listázza (dátum szerint csökkenően, lapozva).
+<img width="847" height="177" alt="image" src="https://github.com/user-attachments/assets/148cf7a0-4087-439d-a441-75b229283e51" />
 
 **Válasz:** `200 OK`
 ```json
@@ -461,25 +465,8 @@ Bejelentkezés e-mail címmel és jelszóval.
 
 ---
 
-### **GET** `/events/{event}` - Konkrét Esemény Megtekintése
-
-**Válasz:** `200 OK`
-```json
-{
-    "id": 1,
-    "name": "Laravel Konferencia 2026",
-    "description": "Minden, ami Laravel. Előadások, workshopok.",
-    "date": "2026-10-20 09:00:00",
-    "location": "Budapest",
-    "max_participants": 100,
-    "created_at": "2026-01-14T10:00:00Z",
-    "updated_at": "2026-01-14T10:00:00Z"
-}
-```
-
----
-
 ### **POST** `/events` - Esemény Létrehozása (Admin Csak)
+<img width="835" height="148" alt="image" src="https://github.com/user-attachments/assets/0ab9af8b-5376-4b6d-a0d6-48bfe0208997" />
 
 **Kérés Törzse:**
 ```json
@@ -509,6 +496,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **PUT** `/events/{event}` - Esemény Módosítása (Admin Csak)
+<img width="841" height="147" alt="image" src="https://github.com/user-attachments/assets/3b4f747c-c8fb-452b-897b-578478e02624" />
 
 **Kérés Törzse:**
 ```json
@@ -535,6 +523,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **DELETE** `/events/{event}` - Esemény Törlése (Admin Csak)
+<img width="854" height="164" alt="image" src="https://github.com/user-attachments/assets/57702354-469c-41de-9e40-6bf157ff9a64" />
 
 **Válasz:** `200 OK`
 ```json
@@ -546,11 +535,13 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **GET** `/events/filter` - Események Szűrése
+<img width="807" height="146" alt="image" src="https://github.com/user-attachments/assets/de9f1922-22de-4433-8190-533a6465d5ea" />
 
 **Lekérdezési paraméterek:** `date_from`, `date_to`, `location`
 
 **Példa URL:**
 `/events/filter?date_from=2026-01-01&date_to=2026-12-31&location=Budapest`
+<img width="863" height="123" alt="image" src="https://github.com/user-attachments/assets/0926a4e8-b960-49d3-9199-8aa381267258" />
 
 **Válasz:** `200 OK`
 ```json
@@ -569,6 +560,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ## Regisztrációk Kezelése
 
 ### **POST** `/events/{event}/register` - Eseményre Regisztráció
+<img width="860" height="150" alt="image" src="https://github.com/user-attachments/assets/62fa7abf-0ed5-4506-9390-14f9cfa16477" />
 
 **Válasz (sikeres):** `201 Created`
 ```json
@@ -594,6 +586,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **DELETE** `/events/{event}/unregister` - Leiratkozás Eseményről
+<img width="855" height="133" alt="image" src="https://github.com/user-attachments/assets/1d1d12e2-694b-4309-98a8-0dd7b3aa9f9f" />
 
 **Válasz (sikeres):** `200 OK`
 ```json
@@ -605,6 +598,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **DELETE** `/events/{event}/users/{user}` - Admin töröl felhasználót az eseményről
+![Uploading image.png…]()
 
 **Válasz (sikeres):** `200 OK`
 ```json
