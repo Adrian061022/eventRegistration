@@ -559,7 +559,8 @@ Bejelentkezés e-mail címmel és jelszóval.
 ## Regisztrációk Kezelése
 
 ### **POST** `/events/{event}/register` - Eseményre Regisztráció
-<img width="855" height="133" alt="image" src="https://github.com/user-attachments/assets/1d1d12e2-694b-4309-98a8-0dd7b3aa9f9f" />
+<img width="851" height="119" alt="image" src="https://github.com/user-attachments/assets/5365d42d-ecf9-449e-aa85-346d5f1c041f" />
+
 
 **Válasz (sikeres):** `201 Created`
 ```json
