@@ -150,6 +150,7 @@ eventRegistration/
 ### **POST** `/register` - Regisztráció
 
 Új felhasználó regisztrálása. Az új felhasználók alapértelmezetten normál felhasználók (`is_admin = false`).
+<img width="832" height="139" alt="image" src="https://github.com/user-attachments/assets/503b92b8-68bc-438c-84f0-5f125dbef017" />
 
 **Kérés Törzse:**
 ```json
@@ -190,6 +191,7 @@ eventRegistration/
 ### **POST** `/login` - Bejelentkezés
 
 Bejelentkezés e-mail címmel és jelszóval.
+<img width="830" height="130" alt="image" src="https://github.com/user-attachments/assets/0c0b65f1-20d1-4395-b2eb-ec481575470c" />
 
 **Kérés Törzse:**
 ```json
@@ -223,6 +225,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **POST** `/logout` - Kijelentkezés
+<img width="831" height="129" alt="image" src="https://github.com/user-attachments/assets/80f16100-e353-4903-a140-ba99c95a7ecf" />
 
 **Válasz (sikeres kijelentkezés):** `200 OK`
 ```json
@@ -236,6 +239,8 @@ Bejelentkezés e-mail címmel és jelszóval.
 ### **GET** `/users/me` - Aktuális Profil
 
 **Válasz:** `200 OK`
+<img width="849" height="157" alt="image" src="https://github.com/user-attachments/assets/e931ebc0-062e-409f-99a6-124e3528e2c9" />
+
 ```json
 {
     "id": 5,
@@ -248,6 +253,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **PUT** `/users/me` - Profil Frissítése
+<img width="827" height="114" alt="image" src="https://github.com/user-attachments/assets/82552045-6336-4d6f-9544-5864ee17a038" />
 
 **Kérés Törzse:**
 ```json
@@ -272,6 +278,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **GET** `/users` - Összes Felhasználó Listázása (Admin Csak)
+<img width="832" height="133" alt="image" src="https://github.com/user-attachments/assets/4ed5abb1-d562-47d5-b0a4-fbcc307acb1f" />
 
 **Válasz:** `200 OK`
 ```json
@@ -299,6 +306,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **GET** `/users/{id}` - Konkrét Felhasználó Megtekintése (Admin Csak)
+<img width="846" height="137" alt="image" src="https://github.com/user-attachments/assets/cdd0e239-591e-42d4-a7f2-102afe2c2d42" />
 
 **Válasz:** `200 OK`
 ```json
@@ -313,6 +321,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ---
 
 ### **DELETE** `/users/{id}` - Felhasználó Törlése (Admin Csak)
+<img width="839" height="133" alt="image" src="https://github.com/user-attachments/assets/acabacbb-fbcc-4cd3-8ef5-3cdfd195c074" />
 
 **Válasz (sikeres törlés):** `200 OK`
 ```json
@@ -326,6 +335,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 ## Események Kezelése
 
 ### **GET** `/events` - Összes Esemény Listázása
+<img width="835" height="142" alt="image" src="https://github.com/user-attachments/assets/a8be7912-26f9-4e25-b6b5-03ed25c37158" />
 
 **Válasz:** `200 OK`
 ```json
