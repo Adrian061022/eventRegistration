@@ -131,9 +131,18 @@ eventRegistration/
 ## API Végpontok
 
 ### Nem védett végpontok:
-- **GET** `/hello` - API teszteléshez
+- **GET** `/ping` - API teszteléshez
 - **POST** `/register` - Regisztrációhoz
 - **POST** `/login` - Bejelentkezéshez
+
+### **GET** `/ping` - API tesztelés
+
+**Válasz:** `200 OK`
+```json
+{
+    "message": "API működik!"
+}
+```
 
 ### Hibák kezelése:
 - **400 Bad Request**: A kérés hibás formátumú vagy hiányoznak a szükséges mezők
@@ -236,7 +245,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 
 ---
 
-### **GET** `/users/me` - Aktuális Profil
+### **GET** `/me` - Aktuális Profil
 
 **Válasz:** `200 OK`
 <img width="849" height="157" alt="image" src="https://github.com/user-attachments/assets/e931ebc0-062e-409f-99a6-124e3528e2c9" />
@@ -252,7 +261,7 @@ Bejelentkezés e-mail címmel és jelszóval.
 
 ---
 
-### **PUT** `/users/me` - Profil Frissítése
+### **PUT** `/me` - Profil Frissítése
 <img width="827" height="114" alt="image" src="https://github.com/user-attachments/assets/82552045-6336-4d6f-9544-5864ee17a038" />
 
 **Kérés Törzse:**
@@ -305,6 +314,34 @@ Bejelentkezés e-mail címmel és jelszóval.
 
 ---
 
+### **POST** `/users` - Felhasználó Létrehozása (Admin Csak)
+
+**Kérés Törzse:**
+```json
+{
+    "name": "New User",
+    "email": "newuser@example.com",
+    "password": "Password_2026",
+    "phone": "+36201234567",
+    "is_admin": false
+}
+```
+
+**Válasz:** `201 Created`
+```json
+{
+    "id": 12,
+    "name": "New User",
+    "email": "newuser@example.com",
+    "phone": "+36201234567",
+    "is_admin": false,
+    "created_at": "2026-01-14T12:30:00Z",
+    "updated_at": "2026-01-14T12:30:00Z"
+}
+```
+
+---
+
 ### **GET** `/users/{id}` - Konkrét Felhasználó Megtekintése (Admin Csak)
 <img width="846" height="137" alt="image" src="https://github.com/user-attachments/assets/cdd0e239-591e-42d4-a7f2-102afe2c2d42" />
 
@@ -315,6 +352,30 @@ Bejelentkezés e-mail címmel és jelszóval.
     "name": "John Doe",
     "email": "john@example.com",
     "phone": "+36201234567"
+}
+```
+
+---
+
+### **PUT** `/users/{id}` - Felhasználó Módosítása (Admin Csak)
+
+**Kérés Törzse:**
+```json
+{
+    "name": "Updated User",
+    "phone": "+36209876543",
+    "is_admin": true
+}
+```
+
+**Válasz:** `200 OK`
+```json
+{
+    "id": 5,
+    "name": "Updated User",
+    "email": "john@example.com",
+    "phone": "+36209876543",
+    "is_admin": true
 }
 ```
 
@@ -352,6 +413,50 @@ Bejelentkezés e-mail címmel és jelszóval.
         "deleted_at": null
     }
 ]
+```
+
+---
+
+### **GET** `/events/upcoming` - Közelgő Események
+
+**Leírás:** csak a jövőbeli eseményeket listázza (dátum szerint növekvően, lapozva).
+
+**Válasz:** `200 OK`
+```json
+{
+    "data": [
+        {
+            "id": 3,
+            "name": "Tech Conference 2024",
+            "date": "2026-02-15 10:00:00",
+            "location": "Budapest"
+        }
+    ],
+    "current_page": 1,
+    "per_page": 15
+}
+```
+
+---
+
+### **GET** `/events/past` - Múltbeli Események
+
+**Leírás:** csak a múltbeli eseményeket listázza (dátum szerint csökkenően, lapozva).
+
+**Válasz:** `200 OK`
+```json
+{
+    "data": [
+        {
+            "id": 5,
+            "name": "Webfejlesztés Alapjai",
+            "date": "2026-01-01 09:00:00",
+            "location": "Debrecen"
+        }
+    ],
+    "current_page": 1,
+    "per_page": 15
+}
 ```
 
 ---
@@ -440,15 +545,12 @@ Bejelentkezés e-mail címmel és jelszóval.
 
 ---
 
-### **POST** `/events/filter` - Események Szűrése
+### **GET** `/events/filter` - Események Szűrése
 
-**Kérés Törzse:**
-```json
-{
-  "name": "Laravel",
-  "location": "Budapest"
-}
-```
+**Lekérdezési paraméterek:** `date_from`, `date_to`, `location`
+
+**Példa URL:**
+`/events/filter?date_from=2026-01-01&date_to=2026-12-31&location=Budapest`
 
 **Válasz:** `200 OK`
 ```json
@@ -517,19 +619,21 @@ Bejelentkezés e-mail címmel és jelszóval.
 
 | HTTP | Útvonal | Jogosultság | Státusz | Leírás |
 |------|---------|-------------|--------|--------|
-| GET | `/hello` | Nyilvános | 200 OK | API teszteléshez |
+| GET | `/ping` | Nyilvános | 200 OK | API teszteléshez |
 | POST | `/register` | Nyilvános | 201 Created, 422 | Regisztráció |
 | POST | `/login` | Nyilvános | 200 OK, 401 | Bejelentkezés |
 | POST | `/logout` | Auth | 200 OK, 401 | Kijelentkezés |
-| GET | `/users/me` | Auth | 200 OK, 401 | Saját profil |
-| PUT | `/users/me` | Auth | 200 OK, 401, 422 | Profil frissítés |
+| GET | `/me` | Auth | 200 OK, 401 | Saját profil |
+| PUT | `/me` | Auth | 200 OK, 401, 422 | Profil frissítés |
 | GET | `/users` | Admin | 200 OK, 403, 401 | Összes felhasználó |
 | GET | `/users/{id}` | Admin | 200 OK, 403, 404, 401 | Konkrét felhasználó |
+| POST | `/users` | Admin | 201 Created, 403, 401 | Felhasználó létrehozás |
+| PUT | `/users/{id}` | Admin | 200 OK, 403, 401 | Felhasználó módosítás |
 | DELETE | `/users/{id}` | Admin | 200 OK, 403, 404, 401 | Felhasználó törlés (soft delete) |
 | GET | `/events` | Auth | 200 OK, 401 | Események |
 | GET | `/events/upcoming` | Auth | 200 OK, 401 | Közelgő események |
 | GET | `/events/past` | Auth | 200 OK, 401 | Múltbeli események |
-| POST | `/events/filter` | Auth | 200 OK, 401 | Események szűrése |
+| GET | `/events/filter` | Auth | 200 OK, 401 | Események szűrése |
 | GET | `/events/{event}` | Auth | 200 OK, 401, 404 | Konkrét esemény |
 | POST | `/events` | Admin | 201 Created, 403, 401 | Esemény létrehozás |
 | PUT | `/events/{event}` | Admin | 200 OK, 403, 401 | Esemény módosítás |
